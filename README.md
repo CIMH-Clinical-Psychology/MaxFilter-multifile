@@ -22,4 +22,12 @@ Then simply run `python maxfilter_multifile.py`
 
 ![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/967d3a5f-b4e4-42f9-b2d9-229e54a7cbca)
 
+![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/50a943d1-97e2-4e7c-aba6-21085d1cc41f)
+
+![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/e8f61e73-a4d1-462d-b455-ef5b0194ea67)
+
+![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/48d93d41-9e86-41e4-89b2-e3983e70a2c4)
+
+![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/2452d47f-c084-4e37-95db-d4e57ee404f7)
+
 ![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/dbd64a44-851a-4cde-b700-8b69aa40a4e2)
