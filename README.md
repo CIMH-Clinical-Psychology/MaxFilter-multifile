@@ -12,10 +12,13 @@ You can select between
 
 
 ### Requirements:**
-`pip install easygui`
+- `pip install easygui`
+- Any Python>=3.5 should work.
 
-Any Python>=3.5 should work.
+
 Then simply run `python maxfilter_multifile.py`
+
+You might need to adapt some paths, i.e. the path to the maxfilter binary file and your data storage.
 
 ### Screenshots
 ![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/a62ebf26-f822-40bf-9937-6bf43fd18d78)
