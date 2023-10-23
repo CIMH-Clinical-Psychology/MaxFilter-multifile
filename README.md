@@ -11,10 +11,13 @@ You can select between
 - Optionally it can move the files after filtering to a specific location (customized to our setup, you would need to change the last lines of the script.)
 
 
-#### requirements:**
+### Requirements:**
 `pip install easygui`
 
-#### Screenshots
+Any Python>=3.5 should work.
+Then simply run `python maxfilter_multifile.py`
+
+### Screenshots
 ![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/a62ebf26-f822-40bf-9937-6bf43fd18d78)
 
 ![image](https://github.com/CIMH-Clinical-Psychology/MaxFilter-multifile/assets/14980558/967d3a5f-b4e4-42f9-b2d9-229e54a7cbca)
