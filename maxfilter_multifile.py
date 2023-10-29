@@ -179,32 +179,4 @@ print("Finished!")
 
 
 if p_copy!="no": # this means copy files to here
-    for i, file_out in enumerate(file_outs):
-        proj_name = os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(file_out))))
-        subj_name = os.path.basename(os.path.dirname(os.path.dirname(file_out)))
-        copyto_folder = os.path.join("Maxfiltered", proj_name, subj_name)
-        cmd_mkdir = 'smbclient -U meduser //hobbes/daten/ meduser1 -c "recurse ON; mkdir {}"'.format(copyto_folder)
-        check_output(cmd_mkdir, shell=True)
-        if " " in file_out or " " in copyto_folder:
-             print("cannot copy file as the name contains spaces.") 
-        else:
-            file_copy = os.path.join(copyto_folder, os.path.basename(file_out))
-            copycmd = 'smbclient -U meduser //hobbes/daten/ meduser1 -c "put {} {}"'.format(file_out, file_copy)
-            print(f"copying file {i} from {len(file_outs)} to {copyto_folder}")
-            check_output(copycmd, shell=True)
-    # last but not least copy the log file
-    file_copy = os.path.join("Maxfiltered", proj_name, os.path.basename(logfile))
-    copycmd = 'smbclient -U meduser //hobbes/daten/ meduser1 -c "put {} {}"'.format(logfile, file_copy)
-    print(f"copying logfile to {file_copy}")
-    check_output(copycmd, shell=True)   
-
-if "delete" in p_copy:
-    # delete our filtered files on sinuhe and only keep the filtered files on Hobbes
-    # however, keep the logfile in any case
-    for file in file_outs:
-        assert "sss" in file, f"Trying to delete {file}, but is not filtered, ERROR"
-        os.remove(file)
-        print(f"deleting {file}")
-
-
-print("\n\n#### Done! ###\n\n")
+    raise Exception('Only applicable for within ZI use')
