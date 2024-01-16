@@ -56,7 +56,10 @@ while (choice:=easygui.indexbox(f'There are {len(files)} file(s) on the queue:\n
         for file in files_added: # make sure not to include duplicates
             if file not in files:
                 files.append(file)
-                
+    file_with_spaces = [file for file in files if " " in file]
+    if file_with_spaces:
+        easygui.msgbox(f"Warning! Some file paths contain spaces, cannot filter them. Please make sure the files and folder names don't contain any spaces:\n\n{file_with_spaces}")
+
     # automatically detect file parts and separate them.
     files, files_parts = check_split_file(files)
     
@@ -94,7 +97,7 @@ if p_head=='default':
     file_ending += '_default'
 elif p_head=='initial':
     file_ending += '_initial'
-elif p_head=='from file':
+elif p_head=='from other file':
     zenity_filechooser = 'zenity --file-selection --filename={0} --title "Select FIF file for head position tranformation reading" --file-filter=*.fif'.format(files[0])
     headpos_file = check_output(zenity_filechooser, shell=True)
     headpos_file = headpos_file.strip().decode()
@@ -179,4 +182,32 @@ print("Finished!")
 
 
 if p_copy!="no": # this means copy files to here
-    raise Exception('Only applicable for within ZI use')
+    for i, file_out in enumerate(file_outs):
+        proj_name = os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(file_out))))
+        subj_name = os.path.basename(os.path.dirname(os.path.dirname(file_out)))
+        copyto_folder = os.path.join("Maxfiltered", proj_name, subj_name)
+        cmd_mkdir = 'smbclient -U meduser //hobbes/daten/ meduser1 -c "recurse ON; mkdir {}"'.format(copyto_folder)
+        check_output(cmd_mkdir, shell=True)
+        if " " in file_out or " " in copyto_folder:
+             print("cannot copy file as the name contains spaces.") 
+        else:
+            file_copy = os.path.join(copyto_folder, os.path.basename(file_out))
+            copycmd = 'smbclient -U meduser //hobbes/daten/ meduser1 -c "put {} {}"'.format(file_out, file_copy)
+            print(f"copying file {i} from {len(file_outs)} to {copyto_folder}")
+            check_output(copycmd, shell=True)
+    # last but not least copy the log file
+    file_copy = os.path.join("Maxfiltered", proj_name, os.path.basename(logfile))
+    copycmd = 'smbclient -U meduser //hobbes/daten/ meduser1 -c "put {} {}"'.format(logfile, file_copy)
+    print(f"copying logfile to {file_copy}")
+    check_output(copycmd, shell=True)   
+
+if "delete" in p_copy:
+    # delete our filtered files on sinuhe and only keep the filtered files on Hobbes
+    # however, keep the logfile in any case
+    for file in file_outs:
+        assert "sss" in file, f"Trying to delete {file}, but is not filtered, ERROR"
+        os.remove(file)
+        print(f"deleting {file}")
+
+
+print("\n\n#### Done! ###\n\n")
